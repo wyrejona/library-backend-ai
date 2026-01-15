@@ -1,11 +1,19 @@
-from openai import OpenAI
-from app.config import OPENAI_API_KEY
+import numpy as np
+from google.generativeai import client as gclient
+from app.config import GEMINI_API_KEY
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+# Configure Gemini client
+gclient.configure(api_key=GEMINI_API_KEY)
 
-def embed_text(text: str):
-    response = client.embeddings.create(
-        model="text-embedding-3-small",
-        input=text
+def embed_text(text):
+    """
+    Generate embeddings using Google Gemini free API
+    """
+    # Call Gemini embeddings endpoint
+    response = gclient.embeddings.create(
+        model="gemini-text-embedding-3-large",  # free-tier embedding model
+        text=text
     )
-    return response.data[0].embedding
+    
+    # Convert to numpy array for FAISS
+    return np.array(response['embedding'], dtype=np.float32)
