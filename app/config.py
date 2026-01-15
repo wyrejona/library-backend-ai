@@ -1,9 +1,10 @@
 import os
 from dotenv import load_dotenv
 
+# Load variables from .env file
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-if not OPENAI_API_KEY:
-    raise RuntimeError("OPENAI_API_KEY not set")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY is missing from .env file")
