@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputField = document.getElementById('lcw-input');
     const messagesContainer = document.getElementById('lcw-messages');
 
+    if(!toggleBtn) return; // Exit if elements don't exist (e.g. wrong page)
+
     function toggleChat() {
         if (chatWindow.style.display === 'none') {
             chatWindow.style.display = 'flex';
